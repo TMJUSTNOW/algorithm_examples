@@ -15,6 +15,7 @@ class DepthFirstPaths:
 		self.marked = [False for x in range(myGraph.nVertices)]
 		self.edgeTo = [None for x in range(myGraph.nVertices)]
 		self.marked[s] = True
+		self.edgeTo[s] = s
 		self.dfs(myGraph,s)
 
 
