@@ -21,9 +21,9 @@ class TestGraph(unittest.TestCase):
 		myGraph.addEdge(3,2)
 		actual = []
 		for v in range(myGraph.nVertices):
-			actual.extend([(v,w) for w in myGraph.adjacencyList[v]])
+			actual.extend([[v,w] for w in myGraph.adjacencyList[v]])
 
-		expected = [(0,2),(1,2),(2,0),(2,1),(2,3),(3,2)]
+		expected = [[0,2],[1,2],[2,0],[2,1],[2,3],[3,2]]
 		self.assertEqual(actual,expected)
 
 if __name__=='__main__':

@@ -51,6 +51,7 @@ class Graph:
 		[0]
 
 		"""
+		assert 0 <= v <= self.nVertices-1, "Vertex index is smaller or greater than the number of vertices."
 		return self.adjacencyList[v]
 
 	def __str__(self):
@@ -78,14 +79,52 @@ class Graph:
 		"""
 		for v,nbhd in enumerate(adjacencyList):
 			for w in nbhd:
-				addEdge(v,w)
+				self.addEdge(v,w)
 
 
 #Decoupleing graph data type from graph processing
-def dfs():
-	print "Not implemented yet."
+class DepthFirstPaths:
+
+	marked = []
+	edgeTo = []
+
+	def __init__(self,myGraph,s=0):
+		'''(Graph,int) -> noneType
+
+		'''
+		self.marked = [False for x in range(myGraph.nVertices)]
+		self.edgeTo = [None for x in range(myGraph.nVertices)]
+		self.dfs(myGraph,s)
+
+
+	def dfs(self,myGraph,s=0):
+		'''(Graph,int) -> NoneType
+
+		Change the marked and edgeTo lists by traversing over the graph.
+
+		'''
+		self.marked[s] = True
+		self.edgeTo[s] = s
+		for w in myGraph.adj(s):
+			if self.marked[w]!=True:
+				self.marked[w]=True
+				self.edgeTo[w] = s
+				self.dfs(myGraph,w)
 
 
 if __name__=="__main__":
-	dfs()
+
+	#Initialize a graph
+	myGraph = Graph(6)
+	myGraph.addEdgesFromAdjacencyList(
+		[[1],
+		[2],
+		[3],
+		[4,5],
+		[],
+		[]])
+
+	dfsVal = DepthFirstPaths(myGraph,0)
+	print dfsVal.marked
+	print dfsVal.edgeTo
 
