@@ -20,6 +20,7 @@ class Graph:
 
 	def __str__(self):
 		"""String representation"""
+		return 'Graph has {0} edges.'.format(self.V)
 
 
 def main():
