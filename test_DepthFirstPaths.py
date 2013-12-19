@@ -23,6 +23,7 @@ class TestGraph(unittest.TestCase):
 		dfsOfGraph = depthFirstPaths.DepthFirstPaths(myGraph,0)
 		self.assertEqual(dfsOfGraph.marked,[True, True, True, True, True, True])
 		self.assertEqual(dfsOfGraph.edgeTo,[0,0,1,2,3,3])
+		self.assertEqual(dfsOfGraph.pathTo(5),[3,2,1,0])
 	
 if __name__=='__main__':
 	unittest.main(exit=False)
