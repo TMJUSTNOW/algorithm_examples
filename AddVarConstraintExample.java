@@ -1,3 +1,29 @@
+/*
+
+Uses Gurobi optimization solver.
+
+A simple example to add a decision variable to an existing optimization problem.
+
+Solve 
+      max 3x + 2z st
+        2x +  z <= 18
+        2x + 3z <= 42
+        3x +  z <= 24
+        x >= 0
+        z >= 0
+
+And,
+
+Solve 
+      max 3x + 2z + 0y st
+        2x +  z + 0y <= 18
+        2x + 3z + 2y <= 42
+        3x +  z + 2y <= 24
+        x >= 0
+        z >= 0
+        y >= 1
+        
+*/
 import gurobi.*;
 
 public class AddVarConstraintExample {
@@ -66,17 +92,19 @@ public class AddVarConstraintExample {
       double newLB = 1;
       System.out.println("\nAdding new var: "+newVarName);
       GRBVar[] newDecision = new GRBVar[1];
-      newDecision[0] = model.addVar(newLB,GRB.INFINITY,newCost,GRB.CONTINUOUS,newVarName);
-      model.update();
+      newDecision[0] = model.addVar(newLB,GRB.INFINITY,newCost,GRB.CONTINUOUS,newVarName);//CRITICAL STEP
+      model.update();//CRITIAL STEP
       double newConstraintCoeffsAddendum[] = new double[] {0,2,2};
       for (int i = 0; i < nConstraints; ++i) {
-        constraint[i].addTerm(newConstraintCoeffsAddendum[i],newDecision[0]);
+        constraint[i].addTerm(newConstraintCoeffsAddendum[i],newDecision[0]);//CRITICAL STEP
         model.addConstr(constraint[i], GRB.LESS_EQUAL, constraintRHS[i], constraintNames[i]);
       }
 
+      // Solve
       model.optimize();
       printSolution(model, concatGRBVar(decision,newDecision));
 
+    
       // Dispose off model and environment
       model.dispose();
       env.dispose();
