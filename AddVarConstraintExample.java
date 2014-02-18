@@ -22,7 +22,7 @@ Solve
         x >= 0
         z >= 0
         y >= 1
-        
+
 */
 import gurobi.*;
 
@@ -128,7 +128,7 @@ public class AddVarConstraintExample {
     }
   }
 
-  public static GRBVar[] concatGRBVar(GRBVar[] A, GRBVar[] B) {
+  private static GRBVar[] concatGRBVar(GRBVar[] A, GRBVar[] B) {
    int aLen = A.length;
    int bLen = B.length;
    GRBVar[] C= new GRBVar[aLen+bLen];
