@@ -51,7 +51,7 @@ def divisors_of(nr):
 def sum_prop_div(nr):
   return sum(divisors_of(nr))-nr
   
-def main():
+def p21():
   '''
   21
   Let d(n) be defined as the sum of proper divisors of n (numbers less than n which divide evenly into n).
@@ -74,7 +74,15 @@ def main():
       amicable.append(i)
       amicable.append(dn[i])
 
-  print sum(list(set(amicable)))
+  print sum(list(set(amicable))) #31626
+
+def p22():
+  print "hi"
+
+
+def main():
+  # p21()
+  p22()
   # pdb.set_trace()
   
 if __name__=="__main__":
